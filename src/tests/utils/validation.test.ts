@@ -1,11 +1,11 @@
-import {
+import { 
+  DataType,  
   validateVariableName,
   validateBoolValue,
   validateIntValue,
   validateDefaultValue,
-  formatBoolValue,
-} from '../../utils/validation';
-import { DataType } from '../../types';
+  formatBoolValue 
+} from '../../types';
 
 describe('Validation Utilities', () => {
   describe('validateVariableName', () => {

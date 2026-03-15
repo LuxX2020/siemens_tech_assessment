@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Input, Select, InputNumber, Form, Tooltip } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
-import { Variable, DataType } from '../../types';
-import { validateDefaultValue, formatBoolValue, formatIntValue } from '../../utils/validation';
+import { Variable, DataType, validateDefaultValue, formatBoolValue, formatIntValue } from '../../types';
 
 const { Option } = Select;
 

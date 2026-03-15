@@ -22,6 +22,8 @@ const App: React.FC = observer(() => {
           <VariableTable store={variableStore} />
         </div>
       </div>
+
+      <ImportExportPanel store={variableStore} />
     </div>
   );
 });

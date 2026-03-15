@@ -133,6 +133,43 @@ export class VariableStore {
   }
 
   /**
+   * 从文本导入变量
+   */
+  importFromText(text: string): boolean {
+    try {
+      const importVariables = parseVariableText(text);
+      const newVariables = [ ...this.variables ];
+      for (const importVariable of importVariables) {
+        const varibleExist = this.variables.find(v => v.name === importVariable.name);
+        if (!varibleExist) {
+          newVariables.push(importVariable);
+        } else {
+          newVariables[this.variables.indexOf(varibleExist)] = importVariable;
+        }
+      }
+
+      runInAction(() => {
+        this.variables = newVariables;
+        this.selectedRowKeys = [];
+        this.clearMessages();
+        this.setSuccessMessage('Import successful');
+      });
+
+      return true;
+    } catch (error) {
+      this.setErrorMessage(error instanceof Error ? error.message : 'Import failed');
+      return false;
+    }
+  }
+
+  /**
+   * 导出变量为文本
+   */
+  exportToText(): string {
+    return generateVariableText(this.variables);
+  }
+
+  /**
    * 设置错误消息
    */
   setErrorMessage(message: string): void {
