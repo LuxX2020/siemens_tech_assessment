@@ -1,46 +1,123 @@
-# Getting Started with Create React App
+# PLC Variable Table Editor
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based application for managing and editing PLC variable definitions with visual editing, data validation, and standard format import/export.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Visual Table Editing**: Add, delete, and edit variables in a user-friendly table interface
+- **Automatic Index Management**: Index column is automatically maintained and renumbered
+- **Data Validation**:
+  - Supported data types: `BOOL`, `INT`
+  - Name uniqueness validation (case-insensitive)
+  - INT range validation (-2147483648 to 2147483647)
+- **Smart Data Type Switching**: Automatically resets default values when changing data types
+- **Import/Export**: Support for standard PLC variable definition format (VAR...END_VAR)
+- **Real-time Validation**: Immediate feedback on input errors
 
-### `npm start`
+## Technology Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- React 19.2.4 + TypeScript 4.9.5
+- Ant Design 6.3.2 (UI Component Library)
+- MobX 6.15.0 + mobx-react-lite 4.1.1 (State Management)
+- Less + craco-less (Styling)
+- React Testing Library (Testing)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js 16+ and npm
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+# Install dependencies
+npm install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Start development server
+npm start
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Run tests
+npm test
 
-### `npm run eject`
+# Build for production
+npm run build
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Usage
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Adding Variables
+1. Click the "Add Row" button to add a new variable
+2. The Index column is automatically assigned
+3. Edit the Name, Data Type, Default Value, and Comment columns
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Editing Variables
+1. Click on any cell to enter edit mode
+2. Press Enter or click outside to save changes
+3. Real-time validation provides immediate feedback
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Data Types
+- **BOOL**: Accepts TRUE or FALSE (case-insensitive)
+- **INT**: Accepts integers between -2147483648 and 2147483647
 
-## Learn More
+### Import/Export
+1. **Import**: Paste VAR...END_VAR formatted text and click "Import"
+2. **Export**: Click "Export" to generate formatted text from current table data
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Format Example
+```
+VAR
+  counter : INT := 42 // This is a counter
+  flag : BOOL := TRUE
+END_VAR
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Testing
+
+The application includes comprehensive test coverage for:
+- Utility functions (validation, parsing)
+- MobX stores (state management)
+- React components (UI interactions)
+
+Run tests with:
+```bash
+npm test
+```
+
+## Project Structure
+
+```
+src/
+├── components/           # React components
+│   ├── VariableTable/   # Main table component
+│   ├── TableToolbar/    # Table action buttons
+│   └── ImportExportPanel/ # Import/export interface
+├── stores/              # MobX stores
+├── types/               # TypeScript type definitions
+├── utils/               # Utility functions
+├── styles/              # Less stylesheets
+└── tests/               # Test files
+```
+
+## Test Coverage
+
+The implementation covers all 25 test cases from TEST.md:
+
+1. **Table Display** (5 test cases)
+2. **Add/Delete Rows** (4 test cases)
+3. **Variable Name Editing** (3 test cases)
+4. **Data Type and Default Value** (7 test cases)
+5. **Comment Editing** (2 test cases)
+6. **Import Function** (5 test cases)
+7. **Export Function** (2 test cases)
+
+## Development Notes
+
+- Uses MobX for reactive state management
+- Implements custom editable cells for the Ant Design Table
+- Includes real-time validation with user feedback
+- Supports standard PLC variable format for interoperability
+
+## License
+
+This project is created for technical assessment purposes.
